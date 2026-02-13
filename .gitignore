@@ -3,6 +3,12 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.env
-.venv/
-env/
+.env
+
+# Virtual environment
+venv/
+.env/
+
+# Replit
+.replit
+replit.nix
