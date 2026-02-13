@@ -1,14 +1,9 @@
-# Claw‑Free
+# Claw Free AI Chat Backend
 
-A Python FastAPI backend for an AI assistant project.
+This repository contains the backend server for a simple AI chatbot built with FastAPI.
 
-## Setup
+## Overview
 
-Install dependencies:
-
-## Running locally
-
-## API Endpoints
-
-* `/` – health check
-* `/ask` – send a text and receive AI responses
+- FastAPI backend
+- Chat endpoint using Hugging Face public model for responses (no paid API keys)
+- Ready to import into Replit or any cloud host
