@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claw Free AI Chat</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        #chat { border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: scroll; }
+        .message { margin: 5px 0; }
+        .user { color: blue; }
+        .ai { color: green; }
+        #input { width: 80%; }
+        #send { width: 18%; }
+    </style>
+</head>
+<body>
+    <h1>Claw Free AI Chat</h1>
+    <div id="chat"></div>
+    <input type="text" id="input" placeholder="Type your message..." />
+    <button id="send">Send</button>
+
+    <script>
+        const chatDiv = document.getElementById('chat');
+        const input = document.getElementById('input');
+        const send = document.getElementById('send');
+
+        send.onclick = async () => {
+            const text = input.value;
+            if (!text) return;
+
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = "You: " + text;
+            chatDiv.appendChild(userMsg);
+
+            input.value = '';
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text })
+                });
+                const data = await response.json();
+
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'message ai';
+                aiMsg.textContent = "AI: " + JSON.stringify(data.response);
+                chatDiv.appendChild(aiMsg);
+
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            } catch (err) {
+                console.error(err);
+            }
+        };
+    </script>
+</body>
+</html>
